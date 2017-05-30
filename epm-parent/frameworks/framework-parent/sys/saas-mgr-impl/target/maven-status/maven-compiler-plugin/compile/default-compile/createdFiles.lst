@@ -1,0 +1,4 @@
+com\canopus\saas\domain\TenantManager.class
+com\canopus\saas\impl\UiLabelManagerServiceImpl.class
+com\canopus\saas\impl\TenantBaseManagerServiceImpl.class
+com\canopus\saas\domain\UiLabelManager.class

@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+
+    Copyright(C) 2013 - 2014, assigned to KPISOFT Sdn. Bhd. All rights reserved.
+    Developed by KPISOFT Sdn. Bhd. <http://www.kpisoft.com>
+    
+    This file is part of Strategy Manager DAC Impl.
+    
+    The intellectual and technical concepts contained herein may be covered 
+    by patents, patents in process, and are protected by trade secret or 
+    copyright law. Any unauthorized use of this code without prior approval 
+    from KPISOFT Sdn. Bhd. is prohibited.
+
+-->
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:p="http://www.springframework.org/schema/p" xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
+       http://www.springframework.org/schema/tx
+       http://www.springframework.org/schema/tx/spring-tx-3.1.xsd
+       http://www.springframework.org/schema/context
+       http://www.springframework.org/schema/context/spring-context-3.1.xsd">
+
+    <import resource="classpath:dac-core-context.xml" />
+    <import resource="classpath:sys-dac-impl-context.xml" />
+    <context:annotation-config />
+    <context:component-scan base-package="com.kpisoft.strategy"/>
+
+    
+    <!--  StrategyDAO -->
+    <bean id="StrategyDao" class="com.kpisoft.strategy.dac.dao.StrategyDao"
+          p:sessionFactory-ref="sessionFactory">
+    </bean>
+    
+    <!--  PerformanceProgramDAO -->
+    <bean id="PerformanceProgramDao" class="com.kpisoft.strategy.program.dac.dao.PerformanceProgramDao"
+          p:sessionFactory-ref="sessionFactory">
+    </bean>
+    
+    <!--   StrategyTemplateDAO -->
+    <bean id="StrategyTemplateDao" class="com.kpisoft.strategy.dac.dao.StrategyTemplateDao"
+          p:sessionFactory-ref="sessionFactory">
+    </bean>
+    
+    <!--  ProgramZoneDAO -->
+    <bean id="ProgramZoneDao" class="com.kpisoft.strategy.program.dac.dao.ProgramZoneDao"
+          p:sessionFactory-ref="sessionFactory">
+    </bean>
+       
+    <!-- StrategyProgramPolicyRuleDAO  -->
+    <bean id="StrategyProgramPolicyRuleDao" class="com.kpisoft.strategy.program.dac.dao.StrategyProgramPolicyRuleDao"
+          p:sessionFactory-ref="sessionFactory">
+    </bean>
+   
+    <!-- QuestionCategoryDAO  -->
+    <bean id="QuestionCategoryDao" class="com.kpisoft.strategy.program.dac.dao.QuestionCategoryDao"
+          p:sessionFactory-ref="sessionFactory">
+    </bean>
+   
+</beans>

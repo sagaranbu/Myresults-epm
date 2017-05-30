@@ -1,0 +1,7 @@
+com\canopus\interceptor\vo\UsageInterceptorData.class
+com\canopus\interceptor\vo\AuditLoggingData.class
+com\canopus\interceptor\vo\OperationProfilerData.class
+com\canopus\interceptor\TestEntityDataService.class
+com\canopus\interceptor\InterceptorDataService.class
+com\canopus\interceptor\vo\TestEntity1Data.class
+com\canopus\interceptor\vo\TestEntity2Data.class

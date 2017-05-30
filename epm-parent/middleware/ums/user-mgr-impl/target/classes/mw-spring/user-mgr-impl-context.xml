@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+
+    Copyright(C) 2013 - 2014, assigned to KPISOFT Sdn. Bhd. All rights reserved.
+    Developed by KPISOFT Sdn. Bhd. <http://www.kpisoft.com>
+    
+    This file is part of User Manager Impl.
+    
+    The intellectual and technical concepts contained herein may be covered 
+    by patents, patents in process, and are protected by trade secret or 
+    copyright law. Any unauthorized use of this code without prior approval 
+    from KPISOFT Sdn. Bhd. is prohibited.
+
+-->
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:p="http://www.springframework.org/schema/p" xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
+       http://www.springframework.org/schema/tx
+       http://www.springframework.org/schema/tx/spring-tx-3.1.xsd
+       http://www.springframework.org/schema/context
+       http://www.springframework.org/schema/context/spring-context-3.1.xsd">
+
+	<import resource="classpath:user-mgr-dac-impl-context.xml" />
+	<import resource="classpath:servicelocator.xml"/>
+
+	<bean
+      class="org.jasypt.spring31.properties.EncryptablePropertyPlaceholderConfigurer">
+  <constructor-arg ref="configurationEncryptor" />
+  		<property name="ignoreUnresolvablePlaceholders" value="true" />
+ 		<property name="ignoreResourceNotFound" value="true" />
+ 		
+  		<property name="locations">
+			<list>
+				<value>classpath:openam.properties</value>
+			</list>
+		</property>
+	</bean>
+
+	
+	
+	<bean id="OpenAmConfiguration" 
+		class="com.kpisoft.user.impl.openam.commands.OpenAmConfiguration" >
+		<property name="baseUrl" value="${openam.base.url}"/>
+		<property name="redirectUrl" value="${openam.redirect.url}"/>
+		<property name="adminLogin" value="${openam.admin.login}"/>
+		<property name="adminPassword" value="${openam.admin.pwd}"/>
+		<property name="userCommandPrefix" value="${openam.command.user.prefix}"/>
+		<property name="createUserCommand" value="${openam.command.user.create}"/>
+		<property name="updateUserCommand" value="${openam.command.user.update}"/>
+		<property name="deleteUserCommand" value="${openam.command.user.delete}"/>
+        
+        <property name="sessionCommandPrefix" value="${openam.command.session.prefix}"/>
+		<property name="loginCommand" value="${openam.command.session.login}"/>
+		<property name="logoutCommand" value="${openam.command.session.logout}"/>		
+		<property name="sessionValidateCommand" value="${openam.command.session.validate}"/>
+		<property name="sessionProfileCommand" value="${openam.command.session.profile}"/>
+        <property name="userIdentityAttribute" value="${openam.userid.attribute}"/>
+        
+        <property name="realmEnabled" value="${openam.command.realm.enabled}"/>
+		<property name="createRealmCommand" value="${openam.command.realm.create}"/>
+		<property name="getRealmCommand" value="${openam.command.realm.get}"/>		
+	</bean>
+	
+	<bean id="SessionStatsManager" class="com.kpisoft.user.impl.domain.session.stats.SessionStatsManager" >
+		<property name="aggrPeriodType" value="MONTHLY"/>
+	</bean>
+	<context:component-scan base-package="com.kpisoft.user" />
+	<context:annotation-config />
+
+	<bean id="validator" class="org.springframework.validation.beanvalidation.LocalValidatorFactoryBean" />
+	<bean id="UserManager" class="com.kpisoft.user.impl.domain.UserManager" p:validator-ref="validator"/>
+		
+	<bean id="roleCache" class="com.canopus.mw.cache.LRUCache" />
+	<bean id="operationCache" class="com.canopus.mw.cache.LRUCache" />
+	<bean id="userGroupCache" class="com.canopus.mw.cache.LRUCache" />
+	<bean id="userCache" class="com.canopus.mw.cache.LRUCache" />
+	<bean id="sessionStatsCache" class="com.canopus.mw.cache.LRUCache" />
+    <bean id="dbSessionCache" class="com.canopus.mw.cache.LRUCache" />
+	
+	<bean id="cache" class="com.canopus.mw.cache.LRUCache" />
+	<bean id="orgUserRoleCache" class="com.canopus.mw.cache.LRUCache" />
+	<bean id="orgTypeRoleCache" class="com.canopus.mw.cache.LRUCache" />
+</beans>

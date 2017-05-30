@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+
+    Copyright(C) 2013 - 2014, assigned to KPISOFT Sdn. Bhd. All rights reserved.
+    Developed by Canopus Consulting <http://www.canopusconsulting.com>
+    
+    This file is part of SaaS Manager Impl.
+    
+    The intellectual and technical concepts contained herein may be covered 
+    by patents, patents in process, and are protected by trade secret or 
+    copyright law. Any unauthorized use of this code without prior approval 
+    from KPISOFT Sdn. Bhd. is prohibited.
+
+-->
+
+<!-- <!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd"> -->
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:context="http://www.springframework.org/schema/context" xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+    http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.0.xsd
+    http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd">
+
+	<bean id="parentBeanFactory" class="org.springframework.context.support.ClassPathXmlApplicationContext">
+		<constructor-arg value="classpath*:mw-spring/*context.xml" />
+	</bean>
+
+</beans>

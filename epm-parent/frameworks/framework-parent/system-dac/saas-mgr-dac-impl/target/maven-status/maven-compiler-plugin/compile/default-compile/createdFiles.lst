@@ -1,0 +1,10 @@
+com\canopus\saas\dac\impl\UiLabelDataServiceImpl$2.class
+com\canopus\saas\dac\impl\UiLabelDataServiceImpl.class
+com\canopus\saas\dac\entity\TenantContent.class
+com\canopus\saas\dac\entity\UiLabelLang.class
+com\canopus\saas\dac\impl\UiLabelDataServiceImpl$1.class
+com\canopus\saas\dac\impl\TenantBaseDataServiceImpl.class
+com\canopus\saas\dac\entity\UiLabelBase.class
+com\canopus\saas\dac\dao\UiLabelBaseDao.class
+com\canopus\saas\dac\entity\TenantLangBase.class
+com\canopus\saas\dac\entity\TenantBase.class

@@ -1,0 +1,9 @@
+com\canopus\saas\vo\UiLabelBaseData.class
+com\canopus\saas\UiLabelManagerService.class
+com\canopus\saas\vo\TenantBaseData.class
+com\canopus\saas\TenantBaseManagerService.class
+com\canopus\saas\vo\UiLabelLangData.class
+com\canopus\saas\utils\UiLabelParams.class
+com\canopus\saas\vo\TenantLangData.class
+com\canopus\saas\vo\TenantContentData.class
+com\canopus\saas\vo\params\TenantParams.class

@@ -1,0 +1,25 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <groupId>com.kpisoft.epm</groupId>
+    <artifactId>middleware</artifactId>
+    <version>0.0.1</version>
+  </parent>
+  <artifactId>dac</artifactId>
+  <packaging>pom</packaging>
+  <name>DAC </name>
+  <modules>
+  	<module>interceptor-dac</module>
+  	<module>interceptor-dac-impl</module>
+  	<module>emp-mgr-dac</module>
+  	<module>emp-mgr-dac-impl</module>
+  	<module>kpi-mgr-dac</module>
+  	<module>kpi-mgr-dac-impl</module>
+  	<module>org-mgr-dac</module>
+  	<module>org-mgr-dac-impl</module>
+  	<module>strategy-mgr-dac</module>
+  	<module>strategy-mgr-dac-impl</module>
+  	<module>user-mgr-dac</module>
+  	<module>user-mgr-dac-impl</module>
+  </modules>
+</project>

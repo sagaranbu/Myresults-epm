@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+
+    Copyright(C) 2013 - 2014, assigned to KPISOFT Sdn. Bhd. All rights reserved.
+    Developed by Canopus Consulting <http://www.canopusconsulting.com>
+    
+    This file is part of Middleware Core.
+    
+    The intellectual and technical concepts contained herein may be covered 
+    by patents, patents in process, and are protected by trade secret or 
+    copyright law. Any unauthorized use of this code without prior approval 
+    from KPISOFT Sdn. Bhd. is prohibited.
+
+-->
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.1.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.1.xsd">
+
+	<context:annotation-config />
+
+	<import resource="classpath:middlewareEventClient.xml" />
+
+	<bean id="serviceName" class="java.lang.String">
+		<constructor-arg type="String" value="serviceName" />
+	</bean>
+
+	<!-- IInterceptors interface implementation beans. START -->
+	<!-- The below order is taken for the list in BaseMiddlewareBean -->
+	<bean id="requestInterceptor" class="com.canopus.mw.interceptor.RequestInterceptor" />
+	<bean id="auditLoggingInterceptor" class="com.canopus.mw.interceptor.AuditLoggingInterceptor" />
+	<bean id="operationProfilerInterceptor" class="com.canopus.mw.interceptor.OperationProfilerInterceptor" />
+	<!-- <bean id="usageInterceptor" class="com.canopus.mw.interceptor.UsageInterceptor" /> -->
+	<!-- <bean id="systemStateInterceptor" class="com.canopus.mw.interceptor.SystemStateInterceptor"/> -->
+	<bean id="eventInterceptor" class="com.canopus.mw.interceptor.EventInterceptor"/>
+	<!-- IInterceptors interface implementation beans. END -->
+
+<!-- 	<bean id="interceptorOrder" class="java.util.ArrayList">
+		<constructor-arg type="com.canopus.mw.interceptor.IInterceptor">
+			<list>
+				<ref bean="requestInterceptor" />
+				<ref bean="auditLoggingInterceptor" />
+			</list>
+		</constructor-arg>
+	</bean> -->
+
+	<bean id="componentManager" class="com.canopus.mw.manager.ComponentManager"
+		scope="singleton">
+		<property name="componentInfo" ref="componentInfo" />
+	</bean>
+
+<!-- 	<bean id="componentInfo" class="com.canopus.mw.dto.ComponentInfo"
+		p:name="#{systemProperties.componentName}" p:instanceID="#{systemProperties.componentInstanceID}" />
+ -->
+	<bean id="componentInfo" class="com.canopus.mw.dto.ComponentInfo"
+		p:name="Comp1" p:instanceID="1" />
+		
+	<bean id="mainInterceptor" class="com.canopus.mw.facade.MainInterceptor">
+		<constructor-arg name="interval" type="java.lang.String" value="10"  />
+		<property name="preInvocationMethods" value=""/>
+		<property name="postInvocationMethods" value=""/>
+	</bean>
+
+	<bean id="configurationEncryptor" class="org.jasypt.encryption.pbe.StandardPBEStringEncryptor">
+		<property name="algorithm" value="PBEWithMD5AndDES"/>
+		<property name="password" value="phx_kp1s@ft"/>
+	</bean>
+
+    <bean name="encryptionUtil" class="com.canopus.mw.utils.EncryptionHelper">
+        <property name="encryptor" ref="configurationEncryptor"/>
+    </bean>	
+
+	<context:component-scan base-package="com.canopus.mw" />
+	
+</beans>

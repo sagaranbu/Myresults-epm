@@ -1,0 +1,16 @@
+com\kpisoft\emp\vo\param\EMPParams.class
+com\kpisoft\emp\EmployeeManagerService.class
+com\kpisoft\emp\vo\CategoryData.class
+com\kpisoft\emp\vo\EmployeeOrgRelationshipData.class
+com\kpisoft\emp\utility\EmpErrorCodeEnum.class
+com\kpisoft\emp\vo\EmployeeProfileData.class
+com\kpisoft\emp\event\param\EmployeeGraphEvents.class
+com\kpisoft\emp\DesignationManagerService.class
+com\kpisoft\emp\vo\EmployeeIdentity.class
+com\kpisoft\emp\vo\EmployeePositionData.class
+com\kpisoft\emp\vo\EmployeeSupervisorRelationshipData.class
+com\kpisoft\emp\ManagerLevelService.class
+com\kpisoft\emp\vo\EmployeeFieldData.class
+com\kpisoft\emp\vo\EmployeeData.class
+com\kpisoft\emp\vo\DesignationData.class
+com\kpisoft\emp\vo\ManagerLevelData.class

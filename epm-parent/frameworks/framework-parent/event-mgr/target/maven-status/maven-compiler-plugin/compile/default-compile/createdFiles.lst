@@ -1,0 +1,10 @@
+com\canopus\event\mgr\IEventListenerInvokationHandler.class
+com\canopus\event\mgr\vo\ServiceRule.class
+com\canopus\event\mgr\vo\params\AggregationParams.class
+com\canopus\event\mgr\INotificationService.class
+com\canopus\event\mgr\vo\EventOriginData.class
+com\canopus\event\mgr\ServiceRuleDomainManager.class
+com\canopus\event\mgr\AggregationRuleManager.class
+com\canopus\event\mgr\IEventManager.class
+com\canopus\event\mgr\IAggregationRuleManagerService.class
+com\canopus\event\mgr\vo\params\EventOriginDataParams.class

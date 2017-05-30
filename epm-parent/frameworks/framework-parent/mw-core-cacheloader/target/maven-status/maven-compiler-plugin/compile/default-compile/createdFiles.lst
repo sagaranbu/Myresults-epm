@@ -1,0 +1,6 @@
+com\canopus\mw\cache\MultiTenantCache$MultiTenantCacheLoader.class
+com\canopus\mw\cache\CacheLoader.class
+com\canopus\mw\cache\LRUCache.class
+com\canopus\mw\cache\Cache.class
+com\canopus\mw\cache\MultiTenantCache.class
+com\canopus\mw\cache\LRUCache$LoaderCaller.class

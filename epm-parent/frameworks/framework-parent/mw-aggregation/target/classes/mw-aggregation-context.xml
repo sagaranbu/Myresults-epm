@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+
+    Copyright(C) 2013 - 2014, assigned to KPISOFT Sdn. Bhd. All rights reserved.
+    Developed by Canopus Consulting <http://www.canopusconsulting.com>
+    
+    This file is part of mw-aggregation.
+    
+    The intellectual and technical concepts contained herein may be covered 
+    by patents, patents in process, and are protected by trade secret or 
+    copyright law. Any unauthorized use of this code without prior approval 
+    from KPISOFT Sdn. Bhd. is prohibited.
+
+-->
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:util="http://www.springframework.org/schema/util"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.2.xsd
+		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-3.2.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.2.xsd">
+
+	<context:annotation-config />
+	<context:component-scan base-package="com.canopus.mw.aggregation"></context:component-scan>
+<util:map id="functoidMap" map-class="java.util.HashMap" >
+		<entry>
+			<key>
+				<value>count</value>
+			</key>
+			<bean class="com.canopus.mw.functoids.CountAggrFunctoid">
+			</bean>
+		</entry>
+	</util:map>
+	<bean class="com.canopus.mw.spel.FunctoidMethodResolver">
+	
+		<constructor-arg ref="functoidMap">
+
+		</constructor-arg>
+	</bean>
+	<util:map id="summaryManagersMap" map-class="java.util.HashMap">
+	
+	</util:map>
+	
+
+
+</beans>

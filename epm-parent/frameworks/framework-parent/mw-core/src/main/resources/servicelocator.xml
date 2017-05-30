@@ -1,0 +1,1742 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+
+    Copyright(C) 2013 - 2014, assigned to KPISOFT Sdn. Bhd. All rights reserved.
+    Developed by Canopus Consulting <http://www.canopusconsulting.com>
+    
+    This file is part of Middleware Core.
+    
+    The intellectual and technical concepts contained herein may be covered 
+    by patents, patents in process, and are protected by trade secret or 
+    copyright law. Any unauthorized use of this code without prior approval 
+    from KPISOFT Sdn. Bhd. is prohibited.
+
+-->
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:p="http://www.springframework.org/schema/p" xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
+       http://www.springframework.org/schema/tx
+       http://www.springframework.org/schema/tx/spring-tx-3.1.xsd
+       http://www.springframework.org/schema/context
+       http://www.springframework.org/schema/context/spring-context-3.1.xsd">
+
+	<!-- Routing Table Map START -->
+
+	<bean
+		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name="ignoreUnresolvablePlaceholders" value="true" />
+ 		<property name="ignoreResourceNotFound" value="true" />
+  		<property name="locations">
+			<list>
+				<value>classpath:server.properties</value>
+			</list>
+		</property>
+ 	</bean>
+
+	<bean id="serviceLocator" class="com.canopus.mw.RemoteServiceLocator" init-method="init">
+		<property name="routingTable">
+			<map key-type="com.canopus.mw.ServiceRouteKey" value-type="com.canopus.mw.ServiceRouteDefinition">
+
+
+				<!-- Organization aggregation service -->
+				<entry>
+					<key>
+						<bean id="aggregationServiceKey" class="com.canopus.mw.ServiceRouteKey">
+							<property name="tenantId">
+								<value>*</value>
+							</property>
+							<property name="serviceId">
+								<value>UMSAggregationService</value>
+							</property>
+						</bean>
+					</key>
+					<bean id="aggregationServiceDef" class="com.canopus.mw.ServiceRouteDefinition">
+						<property name="tenantId">
+							<value>*</value>
+						</property>
+						<property name="serviceId">
+							<value>UMSAggregationService</value>
+						</property>
+						<property name="remoteHost">
+							<value>127.0.0.1</value>
+						</property>
+						<property name="remotePort">
+							<value>4447</value>
+						</property>
+						<property name="remoteLookup">
+							<value>ums-service/org-mgr-impl/UMSAggregationService!com.canopus.mw.aggregation.IAggregationService</value>
+						</property>
+					</bean>
+				</entry>
+				<entry>
+					<key>
+						<bean id="eventManagerServiceKey" class="com.canopus.mw.ServiceRouteKey">
+							<property name="tenantId">
+								<value>*</value>
+							</property>
+							<property name="serviceId">
+								<value>EventManagerServiceImple</value>
+							</property>
+						</bean>
+					</key>
+					<bean id="eventManagerServiceDef" class="com.canopus.mw.ServiceRouteDefinition">
+						<property name="tenantId">
+							<value>*</value>
+						</property>
+						<property name="serviceId">
+							<value>EventManagerServiceImple</value>
+						</property>
+						<property name="remoteHost">
+							<value>127.0.0.1</value>
+						</property>
+						<property name="remotePort">
+							<value>4447</value>
+						</property>
+						<property name="remoteLookup">
+							<value>event-mgr-ear/event-mgr-impl/EventManagerServiceImple!com.canopus.event.mgr.IEventManager</value>
+						</property>
+					</bean>
+				</entry>
+
+
+				<!-- sampleMiddlewareService START -->
+				<entry>
+					<key>
+						<bean id="sampleMiddlewareServiceKey" class="com.canopus.mw.ServiceRouteKey">
+							<property name="tenantId">
+								<value>*</value>
+							</property>
+							<property name="serviceId">
+								<value>SampleMiddlewareService</value>
+							</property>
+						</bean>
+					</key>
+					<bean id="sampleMiddlewareServiceDef" class="com.canopus.mw.ServiceRouteDefinition">
+						<property name="tenantId">
+							<value>*</value>
+						</property>
+						<property name="serviceId">
+							<value>SampleMiddlewareService</value>
+						</property>
+						<property name="remoteHost">
+							<value>192.168.2.200</value>
+						</property>
+						<property name="remotePort">
+							<value>4447</value>
+						</property>
+						<property name="remoteLookup">
+							<value>middleware-sample-ear/middleware-service-sample-impl/SampleMiddlewareService!com.kpisoft.mw.ISampleMiddlewareService</value>
+						</property>
+					</bean>
+				</entry>
+				<!-- sampleMiddlewareService END -->
+
+				<!-- sampleMiddlewareService2 START -->
+
+				<entry>
+					<key>
+						<bean id="sampleMiddlewareService2Key" class="com.canopus.mw.ServiceRouteKey">
+							<property name="tenantId">
+								<value>*</value>
+							</property>
+							<property name="serviceId">
+								<value>SampleMiddlewareService2</value>
+							</property>
+						</bean>
+					</key>
+					<bean id="sampleMiddlewareService2Def" class="com.canopus.mw.ServiceRouteDefinition">
+						<property name="tenantId">
+							<value>*</value>
+						</property>
+						<property name="serviceId">
+							<value>SampleMiddlewareService2</value>
+						</property>
+						<property name="remoteHost">
+							<value>127.0.0.1</value>
+						</property>
+						<property name="remotePort">
+							<value>4647</value>
+						</property>
+						<property name="remoteLookup">
+							<value>middleware-sample-ear/middleware-service2-sample-impl/SampleMiddlewareService2!com.canopus.testbed.ISampleMiddlewareService2</value>
+						</property>
+					</bean>
+				</entry>
+				<!-- sampleMiddlewareService2 END -->
+
+				<!-- InterceptorDacService START -->
+				<entry>
+					<key>
+						<bean id="interceptorDacServiceKey" class="com.canopus.mw.ServiceRouteKey">
+							<property name="tenantId">
+								<value>*</value>
+							</property>
+							<property name="serviceId">
+								<value>InterceptorDacService</value>
+							</property>
+						</bean>
+					</key>
+					<bean id="interceptorDacServiceDef" class="com.canopus.mw.ServiceRouteDefinition">
+						<property name="tenantId">
+							<value>*</value>
+						</property>
+						<property name="serviceId">
+							<value>InterceptorDacService</value>
+						</property>
+						<property name="remoteHost">
+							<value>192.168.2.4</value>
+						</property>
+						<property name="remotePort">
+							<value>4447</value>
+						</property>
+						<property name="remoteLookup">
+							<value>ums-service/middleware-service-sample-impl/InterceptorDacService!com.kpisoft.mw.IInterceptorDacService</value>
+						</property>
+					</bean>
+				</entry>
+				<!-- InterceptorDacService END -->
+
+				<!-- OrganizationManagerServiceImpl START -->
+				<entry>
+					<key>
+						<bean id="organizationManagerServiceImplKey" class="com.canopus.mw.ServiceRouteKey">
+							<property name="tenantId">
+								<value>*</value>
+							</property>
+							<property name="serviceId">
+								<value>OrganizationManagerServiceImpl</value>
+							</property>
+						</bean>
+					</key>
+					<bean id="organizationManagerServiceImplDef" class="com.canopus.mw.ServiceRouteDefinition">
+						<property name="tenantId">
+							<value>*</value>
+						</property>
+						<property name="serviceId">
+							<value>OrganizationManagerServiceImpl</value>
+						</property>
+						<property name="remoteHost">
+							<value>182.72.176.214</value>
+						</property>
+						<property name="remotePort">
+							<value>4447</value>
+						</property>
+						<property name="remoteLookup">
+							<value>ums-service/org-mgr-impl/OrganizationManagerServiceImpl!com.kpisoft.org.OrganizationManagerService</value>
+						</property>
+					</bean>
+				</entry>
+				<!-- OrganizationManagerServiceImpl END -->
+
+				<!-- PositionManagerServiceImpl START -->
+				<entry>
+					<key>
+						<bean id="positionManagerServiceImplKey" class="com.canopus.mw.ServiceRouteKey">
+							<property name="tenantId">
+								<value>*</value>
+							</property>
+							<property name="serviceId">
+								<value>PositionManagerServiceImpl</value>
+							</property>
+						</bean>
+					</key>
+					<bean id="positionManagerServiceImplDef" class="com.canopus.mw.ServiceRouteDefinition">
+						<property name="tenantId">
+							<value>*</value>
+						</property>
+						<property name="serviceId">
+							<value>PositionManagerServiceImpl</value>
+						</property>
+						<property name="remoteHost">
+							<value>182.72.176.214</value>
+						</property>
+						<property name="remotePort">
+							<value>4447</value>
+						</property>
+						<property name="remoteLookup">
+							<value>ums-service/org-mgr-impl/PositionManagerServiceImpl!com.kpisoft.org.PositionManagerService</value>
+						</property>
+					</bean>
+				</entry>
+				<!-- PositionManagerServiceImpl END -->
+
+				<!-- EmployeeManagerServiceImpl START -->
+				<entry>
+					<key>
+						<bean id="employeeManagerServiceImplKey" class="com.canopus.mw.ServiceRouteKey">
+							<property name="tenantId">
+								<value>*</value>
+							</property>
+							<property name="serviceId">
+								<value>EmployeeManagerServiceImpl</value>
+							</property>
+						</bean>
+					</key>
+					<bean id="employeeManagerServiceImplDef" class="com.canopus.mw.ServiceRouteDefinition">
+						<property name="tenantId">
+							<value>*</value>
+						</property>
+						<property name="serviceId">
+							<value>EmployeeManagerServiceImpl</value>
+						</property>
+						<property name="remoteHost">
+							<value>182.72.176.214</value>
+						</property>
+						<property name="remotePort">
+							<value>4447</value>
+						</property>
+						<property name="remoteLookup">
+							<value>ums-service/emp-mgr-impl/EmployeeManagerServiceImpl!com.kpisoft.emp.EmployeeManagerService</value>
+						</property>
+					</bean>
+				</entry>
+				<!-- EmployeeManagerServiceImpl END -->
+
+				<!-- UserManagerServiceImpl START -->
+				<entry>
+					<key>
+						<bean id="userManagerServiceImplKey" class="com.canopus.mw.ServiceRouteKey">
+							<property name="tenantId">
+								<value>*</value>
+							</property>
+							<property name="serviceId">
+								<value>UserManagerServiceImpl</value>
+							</property>
+						</bean>
+					</key>
+					<bean id="userManagerServiceImplDef" class="com.canopus.mw.ServiceRouteDefinition">
+						<property name="tenantId">
+							<value>*</value>
+						</property>
+						<property name="serviceId">
+							<value>UserManagerServiceImpl</value>
+						</property>
+						<property name="remoteHost">
+							<value>182.72.176.214</value>
+						</property>
+						<property name="remotePort">
+							<value>4447</value>
+						</property>
+						<property name="remoteLookup">
+							<value>ums-service/user-mgr-impl/UserManagerServiceImpl!com.kpisoft.user.UserManagerService</value>
+						</property>
+					</bean>
+				</entry>
+				<!-- UserManagerServiceImpl END -->
+
+				<!-- UserGroupManagerServiceImpl START -->
+				<entry>
+					<key>
+						<bean id="userGroupManagerServiceImplKey" class="com.canopus.mw.ServiceRouteKey">
+							<property name="tenantId">
+								<value>*</value>
+							</property>
+							<property name="serviceId">
+								<value>UserGroupManagerServiceImpl</value>
+							</property>
+						</bean>
+					</key>
+					<bean id="userGroupManagerServiceImplDef" class="com.canopus.mw.ServiceRouteDefinition">
+						<property name="tenantId">
+							<value>*</value>
+						</property>
+						<property name="serviceId">
+							<value>UserGroupManagerServiceImpl</value>
+						</property>
+						<property name="remoteHost">
+							<value>182.72.176.214</value>
+						</property>
+						<property name="remotePort">
+							<value>4447</value>
+						</property>
+						<property name="remoteLookup">
+							<value>ums-service/user-mgr-impl/UserGroupManagerServiceImpl!com.kpisoft.user.UserGroupManagerService</value>
+						</property>
+					</bean>
+				</entry>
+				<!-- UserGroupManagerServiceImpl END -->
+
+				<!-- RoleManagerServiceImpl START -->
+				<entry>
+					<key>
+						<bean id="roleManagerServiceImplKey" class="com.canopus.mw.ServiceRouteKey">
+							<property name="tenantId">
+								<value>*</value>
+							</property>
+							<property name="serviceId">
+								<value>RoleManagerServiceImpl</value>
+							</property>
+						</bean>
+					</key>
+					<bean id="roleManagerServiceImplDef" class="com.canopus.mw.ServiceRouteDefinition">
+						<property name="tenantId">
+							<value>*</value>
+						</property>
+						<property name="serviceId">
+							<value>RoleManagerServiceImpl</value>
+						</property>
+						<property name="remoteHost">
+							<value>182.72.176.214</value>
+						</property>
+						<property name="remotePort">
+							<value>4447</value>
+						</property>
+						<property name="remoteLookup">
+							<value>ums-service/user-mgr-impl/RoleManagerServiceImpl!com.kpisoft.user.RoleManagerService</value>
+						</property>
+					</bean>
+				</entry>
+				<!-- RoleManagerServiceImpl END -->
+
+				<!-- OperationManagerServiceImpl START -->
+				<entry>
+					<key>
+						<bean id="operationManagerServiceImplKey" class="com.canopus.mw.ServiceRouteKey">
+							<property name="tenantId">
+								<value>*</value>
+							</property>
+							<property name="serviceId">
+								<value>OperationManagerServiceImpl</value>
+							</property>
+						</bean>
+					</key>
+					<bean id="operationManagerServiceImplDef" class="com.canopus.mw.ServiceRouteDefinition">
+						<property name="tenantId">
+							<value>*</value>
+						</property>
+						<property name="serviceId">
+							<value>OperationManagerServiceImpl</value>
+						</property>
+						<property name="remoteHost">
+							<value>182.72.176.214</value>
+						</property>
+						<property name="remotePort">
+							<value>4447</value>
+						</property>
+						<property name="remoteLookup">
+							<value>ums-service/user-mgr-impl/OperationManagerServiceImpl!com.kpisoft.user.OperationManagerService</value>
+						</property>
+					</bean>
+				</entry>
+				<!-- OperationManagerServiceImpl END -->
+
+				<!-- AuthenticationManagerServiceImpl START -->
+				<entry>
+					<key>
+						<bean id="authenticationManagerServiceImplKey" class="com.canopus.mw.ServiceRouteKey">
+							<property name="tenantId">
+								<value>*</value>
+							</property>
+							<property name="serviceId">
+								<value>AuthenticationManagerServiceImpl</value>
+							</property>
+						</bean>
+					</key>
+					<bean id="authenticationManagerServiceImplDef" class="com.canopus.mw.ServiceRouteDefinition">
+						<property name="tenantId">
+							<value>*</value>
+						</property>
+						<property name="serviceId">
+							<value>AuthenticationManagerServiceImpl</value>
+						</property>
+						<property name="remoteHost">
+							<value>182.72.176.214</value>
+						</property>
+						<property name="remotePort">
+							<value>4447</value>
+						</property>
+						<property name="remoteLookup">
+							<value>ums-service/user-mgr-impl/AuthenticationManagerServiceImpl!com.kpisoft.user.AuthenticationManagerService</value>
+						</property>
+					</bean>
+				</entry>
+				<!-- AuthenticationManagerServiceImpl END -->
+
+				<!-- AuthenticationManagerServiceImpl START -->
+				<entry>
+					<key>
+						<bean id="tenantBaseManagerServiceImplKey" class="com.canopus.mw.ServiceRouteKey">
+							<property name="tenantId">
+								<value>*</value>
+							</property>
+							<property name="serviceId">
+								<value>TenantBaseManagerServiceImpl</value>
+							</property>
+						</bean>
+					</key>
+					<bean id="tenantBaseManagerServiceImplDef" class="com.canopus.mw.ServiceRouteDefinition">
+						<property name="tenantId">
+							<value>*</value>
+						</property>
+						<property name="serviceId">
+							<value>TenantBaseManagerServiceImpl</value>
+						</property>
+						<property name="remoteHost">
+							<value>182.72.176.214</value>
+						</property>
+						<property name="remotePort">
+							<value>4447</value>
+						</property>
+						<property name="remoteLookup">
+							<value>ums-service/saas-mgr-impl/TenantBaseManagerServiceImpl!com.canopus.saas.TenantBaseManagerService</value>
+						</property>
+					</bean>
+				</entry>
+				<!-- AuthenticationManagerServiceImpl END -->
+				<!-- GradeManagerServiceImpl START -->
+				<entry>
+					<key>
+						<bean id="gradeManagerServiceImplKey" class="com.canopus.mw.ServiceRouteKey">
+							<property name="tenantId">
+								<value>*</value>
+							</property>
+							<property name="serviceId">
+								<value>GradeManagerServiceImpl</value>
+							</property>
+						</bean>
+					</key>
+					<bean id="gradeManagerServiceImplDef" class="com.canopus.mw.ServiceRouteDefinition">
+						<property name="tenantId">
+							<value>*</value>
+						</property>
+						<property name="serviceId">
+							<value>GradeManagerServiceImpl</value>
+						</property>
+						<property name="remoteHost">
+							<value>127.0.0.1</value>
+						</property>
+						<property name="remotePort">
+							<value>4447</value>
+						</property>
+						<property name="remoteLookup">
+							<value>ums-service/org-mgr-impl/GradeManagerServiceImpl!com.kpisoft.org.GradeManagerService</value>
+						</property>
+					</bean>
+				</entry>
+				<!-- GradeManagerServiceImpl END -->
+
+				<!-- CustomizedEntityManagerServiceImpl START -->
+				<entry>
+					<key>
+						<bean id="customizedEntityManagerServiceImplKey" class="com.canopus.mw.ServiceRouteKey">
+							<property name="tenantId">
+								<value>*</value>
+							</property>
+							<property name="serviceId">
+								<value>CustomizedEntityManagerServiceImpl</value>
+							</property>
+						</bean>
+					</key>
+					<bean id="customizedEntityManagerServiceImplDef" class="com.canopus.mw.ServiceRouteDefinition">
+						<property name="tenantId">
+							<value>*</value>
+						</property>
+						<property name="serviceId">
+							<value>CustomizedEntityManagerServiceImpl</value>
+						</property>
+						<property name="remoteHost">
+							<value>182.72.176.214</value>
+						</property>
+						<property name="remotePort">
+							<value>4447</value>
+						</property>
+						<property name="remoteLookup">
+							<value>ums-service/sys-mgr-impl/CustomizedEntityManagerServiceImpl!com.canopus.entity.CustomizedEntityManagerService</value>
+						</property>
+					</bean>
+				</entry>
+				<!-- CustomizedEntityManagerServiceImpl END -->
+
+				<!-- OrganizationDimensionManagerServiceImpl START -->
+				<entry>
+					<key>
+						<bean id="organizationDimensionManagerServiceImplKey" class="com.canopus.mw.ServiceRouteKey">
+							<property name="tenantId">
+								<value>*</value>
+							</property>
+							<property name="serviceId">
+								<value>OrganizationDimensionManagerServiceImpl</value>
+							</property>
+						</bean>
+					</key>
+					<bean id="organizationDimensionManagerServiceImplDef" class="com.canopus.mw.ServiceRouteDefinition">
+						<property name="tenantId">
+							<value>*</value>
+						</property>
+						<property name="serviceId">
+							<value>OrganizationDimensionManagerServiceImpl</value>
+						</property>
+						<property name="remoteHost">
+							<value>182.72.176.214</value>
+						</property>
+						<property name="remotePort">
+							<value>4447</value>
+						</property>
+						<property name="remoteLookup">
+							<value>ums-service/org-mgr-impl/OrganizationDimensionManagerServiceImpl!com.kpisoft.org.OrganizationDimensionManagerService</value>
+						</property>
+					</bean>
+				</entry>
+				<!-- OrganizationDimensionManagerServiceImpl END -->
+
+				<!-- OrganizationStructureManagerServiceImpl START -->
+				<entry>
+					<key>
+						<bean id="organizationStructureManagerServiceImplKey" class="com.canopus.mw.ServiceRouteKey">
+							<property name="tenantId">
+								<value>*</value>
+							</property>
+							<property name="serviceId">
+								<value>OrganizationStructureManagerServiceImpl</value>
+							</property>
+						</bean>
+					</key>
+					<bean id="organizationStructureManagerServiceImplDef" class="com.canopus.mw.ServiceRouteDefinition">
+						<property name="tenantId">
+							<value>*</value>
+						</property>
+						<property name="serviceId">
+							<value>OrganizationStructureManagerServiceImpl</value>
+						</property>
+						<property name="remoteHost">
+							<value>182.72.176.214</value>
+						</property>
+						<property name="remotePort">
+							<value>4447</value>
+						</property>
+						<property name="remoteLookup">
+							<value>ums-service/org-mgr-impl/OrganizationStructureManagerServiceImpl!com.kpisoft.org.OrganizationStructureManagerService</value>
+						</property>
+					</bean>
+				</entry>
+				<!-- OrganizationStructureManagerServiceImpl END -->
+
+				<!-- UiLabelManagerServiceImpl START -->
+				<entry>
+					<key>
+						<bean id="uiLabelManagerServiceImplKey" class="com.canopus.mw.ServiceRouteKey">
+							<property name="tenantId">
+								<value>*</value>
+							</property>
+							<property name="serviceId">
+								<value>UiLabelManagerServiceImpl</value>
+							</property>
+						</bean>
+					</key>
+					<bean id="uiLabelManagerServiceImplDef" class="com.canopus.mw.ServiceRouteDefinition">
+						<property name="tenantId">
+							<value>*</value>
+						</property>
+						<property name="serviceId">
+							<value>UiLabelManagerServiceImpl</value>
+						</property>
+						<property name="remoteHost">
+							<value>182.72.176.214</value>
+						</property>
+						<property name="remotePort">
+							<value>4447</value>
+						</property>
+						<property name="remoteLookup">
+							<value>ums-service/saas-mgr-impl/UiLabelManagerServiceImpl!com.canopus.saas.UiLabelManagerService</value>
+						</property>
+					</bean>
+				</entry>
+				<!-- UiLabelManagerServiceImpl END -->
+
+				<!-- KpiManagerServiceImpl START -->
+				<entry>
+					<key>
+						<bean id="kpiManagerServiceImplKey" class="com.canopus.mw.ServiceRouteKey">
+							<property name="tenantId">
+								<value>*</value>
+							</property>
+							<property name="serviceId">
+								<value>KpiManagerServiceImpl</value>
+							</property>
+						</bean>
+					</key>
+					<bean id="kpiManagerServiceImplDef" class="com.canopus.mw.ServiceRouteDefinition">
+						<property name="tenantId">
+							<value>*</value>
+						</property>
+						<property name="serviceId">
+							<value>KpiManagerServiceImpl</value>
+						</property>
+						<property name="remoteHost">
+							<value>182.72.176.214</value>
+						</property>
+						<property name="remotePort">
+							<value>4447</value>
+						</property>
+						<property name="remoteLookup">
+							<value>ums-service/kpi-mgr-impl/KpiManagerServiceImpl!com.kpisoft.kpi.KpiManagerService</value>
+						</property>
+					</bean>
+				</entry>
+				<!-- KpiManagerServiceImpl END -->
+
+				<!-- KpiTargetManagerServiceImpl START -->
+				<entry>
+					<key>
+						<bean id="kpiTargetManagerServiceImplKey" class="com.canopus.mw.ServiceRouteKey">
+							<property name="tenantId">
+								<value>*</value>
+							</property>
+							<property name="serviceId">
+								<value>KpiTargetManagerServiceImpl</value>
+							</property>
+						</bean>
+					</key>
+					<bean id="kpiTargetManagerServiceImplDef" class="com.canopus.mw.ServiceRouteDefinition">
+						<property name="tenantId">
+							<value>*</value>
+						</property>
+						<property name="serviceId">
+							<value>KpiTargetManagerServiceImpl</value>
+						</property>
+						<property name="remoteHost">
+							<value>182.72.176.214</value>
+						</property>
+						<property name="remotePort">
+							<value>4447</value>
+						</property>
+						<property name="remoteLookup">
+							<value>ums-service/kpi-mgr-impl/KpiTargetManagerServiceImpl!com.kpisoft.kpi.KpiTargetManagerService</value>
+						</property>
+					</bean>
+				</entry>
+				<!-- KpiTargetManagerServiceImpl END -->
+
+				<!-- ProgramManagerServiceImpl START -->
+				<entry>
+					<key>
+						<bean id="programManagerServiceImplKey" class="com.canopus.mw.ServiceRouteKey">
+							<property name="tenantId">
+								<value>*</value>
+							</property>
+							<property name="serviceId">
+								<value>ProgramManagerServiceImpl</value>
+							</property>
+						</bean>
+					</key>
+					<bean id="programManagerServiceImplDef" class="com.canopus.mw.ServiceRouteDefinition">
+						<property name="tenantId">
+							<value>*</value>
+						</property>
+						<property name="serviceId">
+							<value>ProgramManagerServiceImpl</value>
+						</property>
+						<property name="remoteHost">
+							<value>182.72.176.214</value>
+						</property>
+						<property name="remotePort">
+							<value>4447</value>
+						</property>
+						<property name="remoteLookup">
+							<value>ums-service/strategy-mgr-impl/ProgramManagerServiceImpl!com.kpisoft.strategy.program.service.ProgramManagerService</value>
+						</property>
+					</bean>
+				</entry>
+				<!-- ProgramManagerServiceImpl END -->
+
+				<!-- ScheduledEventManagerService START -->
+				<entry>
+					<key>
+						<bean id="scheduledEventManagerServiceKey" class="com.canopus.mw.ServiceRouteKey">
+							<property name="tenantId">
+								<value>1</value>
+							</property>
+							<property name="serviceId">
+								<value>ScheduledEventManagerServiceImpl</value>
+							</property>
+						</bean>
+					</key>
+					<bean id="scheduledEventManagerServiceDef" class="com.canopus.mw.ServiceRouteDefinition">
+						<property name="tenantId">
+							<value>1</value>
+						</property>
+						<property name="serviceId">
+							<value>ScheduledEventManagerServiceImpl</value>
+						</property>
+						<property name="remoteHost">
+							<value>127.0.0.1</value>
+						</property>
+						<property name="remotePort">
+							<value>4447</value>
+						</property>
+						<property name="remoteLookup">
+							<value>ums-service/sys-mgr-impl/ScheduledEventManagerServiceImpl!com.canopus.mw.sys.ScheduledEventManagerService</value>
+						</property>
+					</bean>
+				</entry>
+				<!-- ScheduledEventManagerService END -->
+
+				<!-- WorkFlowManagerService START -->
+				<entry>
+					<key>
+						<bean id="workflowManagerServiceKey" class="com.canopus.mw.ServiceRouteKey">
+							<property name="tenantId">
+								<value>*</value>
+							</property>
+							<property name="serviceId">
+								<value>WorkflowManagerServiceImpl</value>
+							</property>
+						</bean>
+					</key>
+					<bean id="workflowManagerServiceDef" class="com.canopus.mw.ServiceRouteDefinition">
+						<property name="tenantId">
+							<value>*</value>
+						</property>
+						<property name="serviceId">
+							<value>WorkflowManagerServiceImpl</value>
+						</property>
+						<property name="remoteHost">
+							<value>182.72.176.214</value>
+						</property>
+						<property name="remotePort">
+							<value>4447</value>
+						</property>
+						<property name="remoteLookup">
+							<value>ums-service/kpi-mgr-impl/WorkflowManagerServiceImpl!com.kpisoft.kpi.WorkflowManagerService</value>
+						</property>
+					</bean>
+				</entry>
+				<!-- WorkFlowManagerService END -->
+
+				<!-- EntityManagerServiceImpl START -->
+				<entry>
+					<key>
+						<bean id="entityTypeManagerServiceImplKey" class="com.canopus.mw.ServiceRouteKey">
+							<property name="tenantId">
+								<value>*</value>
+							</property>
+							<property name="serviceId">
+								<value>EntityTypeManagerServiceImpl</value>
+							</property>
+						</bean>
+					</key>
+					<bean id="entityTypeManagerServiceImplDef" class="com.canopus.mw.ServiceRouteDefinition">
+						<property name="tenantId">
+							<value>*</value>
+						</property>
+						<property name="serviceId">
+							<value>EntityTypeManagerServiceImpl</value>
+						</property>
+						<property name="remoteHost">
+							<value>182.72.176.214</value>
+						</property>
+						<property name="remotePort">
+							<value>4447</value>
+						</property>
+						<property name="remoteLookup">
+							<value>ums-service/sys-mgr-impl/EntityTypeManagerServiceImpl!com.canopus.entity.EntityTypeManagerService</value>
+						</property>
+					</bean>
+				</entry>
+				<!-- EntityManagerServiceImpl END -->
+
+				<!-- SystemManagerServiceImpl START -->
+				<entry>
+					<key>
+						<bean id="systemBaseManagerServiceImplKey" class="com.canopus.mw.ServiceRouteKey">
+							<property name="tenantId">
+								<value>*</value>
+							</property>
+							<property name="serviceId">
+								<value>SystemBaseManagerServiceImpl</value>
+							</property>
+						</bean>
+					</key>
+					<bean id="systemBaseManagerServiceImplDef" class="com.canopus.mw.ServiceRouteDefinition">
+						<property name="tenantId">
+							<value>*</value>
+						</property>
+						<property name="serviceId">
+							<value>SystemBaseManagerServiceImpl</value>
+						</property>
+						<property name="remoteHost">
+							<value>182.72.176.214</value>
+						</property>
+						<property name="remotePort">
+							<value>4447</value>
+						</property>
+						<property name="remoteLookup">
+							<value>ums-service/sys-mgr-impl/SystemBaseManagerServiceImpl!com.canopus.entity.SystemBaseManagerService</value>
+						</property>
+					</bean>
+				</entry>
+				<!-- EntityManagerServiceImpl END -->
+				
+				<!-- EmployeeRecipientResolverImpl START -->
+				<entry>
+					<key>
+						<bean id="employeeRecipientResolverImpl" class="com.canopus.mw.ServiceRouteKey">
+							<property name="tenantId">
+								<value>*</value>
+							</property>
+							<property name="serviceId">
+								<value>EmployeeRecipientResolverImpl</value>
+							</property>
+						</bean>
+					</key>
+					<bean id="employeeRecipientResolverImplDef" class="com.canopus.mw.ServiceRouteDefinition">
+						<property name="tenantId">
+							<value>*</value>
+						</property>
+						<property name="serviceId">
+							<value>EmployeeRecipientResolverImpl</value>
+						</property>
+						<property name="remoteHost">
+							<value>182.72.176.214</value>
+						</property>
+						<property name="remotePort">
+							<value>4447</value>
+						</property>
+						<property name="remoteLookup">
+							<value>ums-service/emp-mgr-impl/EmployeeRecipientResolverImpl!com.canopus.mw.IRecipientResolver</value>
+						</property>
+					</bean>
+				</entry>
+				<!-- EmployeeRecipientResolverImpl END -->
+				<!-- OrganizationUnitRecipientResolverImpl START -->
+				<entry>
+					<key>
+						<bean id="organizationUnitRecipientResolverImpl" class="com.canopus.mw.ServiceRouteKey">
+							<property name="tenantId">
+								<value>*</value>
+							</property>
+							<property name="serviceId">
+								<value>OrganizationUnitRecipientResolverImpl</value>
+							</property>
+						</bean>
+					</key>
+					<bean id="organizationUnitRecipientResolverImplDef" class="com.canopus.mw.ServiceRouteDefinition">
+						<property name="tenantId">
+							<value>*</value>
+						</property>
+						<property name="serviceId">
+							<value>OrganizationUnitRecipientResolverImpl</value>
+						</property>
+						<property name="remoteHost">
+							<value>182.72.176.214</value>
+						</property>
+						<property name="remotePort">
+							<value>4447</value>
+						</property>
+						<property name="remoteLookup">
+							<value>ums-service/org-mgr-impl/OrganizationUnitRecipientResolverImpl!com.canopus.mw.IRecipientResolver</value>
+						</property>
+					</bean>
+				</entry>
+				<!-- OrganizationUnitRecipientResolverImpl END -->
+				
+				<!-- RoleRecipientResolverImpl START -->
+				<entry>
+					<key>
+						<bean id="roleRecipientResolverImplKey" class="com.canopus.mw.ServiceRouteKey">
+							<property name="tenantId">
+								<value>*</value>
+							</property>
+							<property name="serviceId">
+								<value>RoleRecipientResolverImpl</value>
+							</property>
+						</bean>
+					</key>
+					<bean id="roleRecipientResolverImplDef" class="com.canopus.mw.ServiceRouteDefinition">
+						<property name="tenantId">
+							<value>*</value>
+						</property>
+						<property name="serviceId">
+							<value>RoleRecipientResolverImpl</value>
+						</property>
+						<property name="remoteHost">
+							<value>182.72.176.214</value>
+						</property>
+						<property name="remotePort">
+							<value>4447</value>
+						</property>
+						<property name="remoteLookup">
+							<value>ums-service/user-mgr-impl/RoleRecipientResolverImpl!com.canopus.mw.IRecipientResolver</value>
+						</property>
+					</bean>
+				</entry>
+				<!-- RoleRecipientResolverImpl END -->
+				
+				<!-- StrategyTemplateManagerServiceImpl START -->
+				<entry>
+					<key>
+						<bean id="strategyTemplateManagerServiceImplKey" class="com.canopus.mw.ServiceRouteKey">
+							<property name="tenantId">
+								<value>*</value>
+							</property>
+							<property name="serviceId">
+								<value>StrategyTemplateManagerServiceImpl</value>
+							</property>
+						</bean>
+					</key>
+					<bean id="strategyTemplateManagerServiceImplDef" class="com.canopus.mw.ServiceRouteDefinition">
+						<property name="tenantId">
+							<value>*</value>
+						</property>
+						<property name="serviceId">
+							<value>StrategyTemplateManagerServiceImpl</value>
+						</property>
+						<property name="remoteHost">
+							<value>182.72.176.214</value>
+						</property>
+						<property name="remotePort">
+							<value>4447</value>
+						</property>
+						<property name="remoteLookup">
+							<value>ums-service/strategy-mgr-impl/StrategyTemplateManagerServiceImpl!com.kpisoft.strategy.StrategyTemplateManagerService</value>
+						</property>
+					</bean>
+				</entry>
+				<!-- StrategyTemplateManagerServiceImpl END -->
+				
+				<!-- ScorecardManagerServiceImpl START -->
+				<entry>
+					<key>
+						<bean id="scorecardManagerServiceImplKey" class="com.canopus.mw.ServiceRouteKey">
+							<property name="tenantId">
+								<value>*</value>
+							</property>
+							<property name="serviceId">
+								<value>ScorecardManagerServiceImpl</value>
+							</property>
+						</bean>
+					</key>
+					<bean id="scorecardManagerServiceImplDef" class="com.canopus.mw.ServiceRouteDefinition">
+						<property name="tenantId">
+							<value>*</value>
+						</property>
+						<property name="serviceId">
+							<value>ScorecardManagerServiceImpl</value>
+						</property>
+						<property name="remoteHost">
+							<value>182.72.176.214</value>
+						</property>
+						<property name="remotePort">
+							<value>4447</value>
+						</property>
+						<property name="remoteLookup">
+							<value>ums-service/kpi-mgr-impl/ScorecardManagerServiceImpl!com.kpisoft.kpi.ScorecardManagerService</value>
+						</property>
+					</bean>
+				</entry>
+				<!-- ScorecardManagerServiceImpl END -->
+
+				<!-- AttachmentManagerServiceImpl START -->
+				<entry>
+					<key>
+						<bean id="attachmentManagerServiceImplKey" class="com.canopus.mw.ServiceRouteKey">
+							<property name="tenantId">
+								<value>*</value>
+							</property>
+							<property name="serviceId">
+								<value>AttachmentManagerServiceImpl</value>
+							</property>
+						</bean>
+					</key>
+					<bean id="attachmentManagerServiceImplDef" class="com.canopus.mw.ServiceRouteDefinition">
+						<property name="tenantId">
+							<value>*</value>
+						</property>
+						<property name="serviceId">
+							<value>AttachmentManagerServiceImpl</value>
+						</property>
+						<property name="remoteHost">
+							<value>182.72.176.214</value>
+						</property>
+						<property name="remotePort">
+							<value>4447</value>
+						</property>
+						<property name="remoteLookup">
+							<value>sys-service/sys-mgr-impl/AttachmentManagerServiceImpl!com.canopus.entity.AttachmentManagerService</value>
+						</property>
+					</bean>
+				</entry>
+				<!-- AttachmentManagerServiceImpl END -->
+
+				<!-- sampleMiddlewarewfService START -->
+				<entry>
+					<key>
+						<bean id="sampleMiddlewareWorkflowServiceKey" class="com.canopus.mw.ServiceRouteKey">
+							<property name="tenantId">
+								<value>*</value>
+							</property>
+							<property name="serviceId">
+								<value>SampleWorkflowMiddlewareService</value>
+							</property>
+						</bean>
+					</key>
+					<bean id="sampleMiddlewareWorkflowServiceDef" class="com.canopus.mw.ServiceRouteDefinition">
+						<property name="tenantId">
+							<value>*</value>
+						</property>
+						<property name="serviceId">
+							<value>SampleWorkflowMiddlewareService</value>
+						</property>
+						<property name="remoteHost">
+							<value>127.0.0.1</value>
+						</property>
+						<property name="remotePort">
+							<value>4747</value>
+						</property>
+						<property name="remoteLookup">
+							<value>middleware-sample1-ear/middleware-service-sample-impl/SampleWorkflowMiddlewareService!com.kpisoft.mw.ISampleMiddlewareService</value>
+						</property>
+					</bean>
+				</entry>
+				<!-- sampleMiddlewarewfService END -->	
+				
+
+
+
+
+
+
+								<entry>
+					<key>
+						<bean id="firstServiceKey" class="com.canopus.mw.ServiceRouteKey">
+							<property name="tenantId">
+								<value>*</value>
+							</property>
+							<property name="serviceId">
+								<value>FirstService</value>
+							</property>
+						</bean>
+					</key>
+					<bean id="firstServiceDef" class="com.canopus.mw.ServiceRouteDefinition">
+						<property name="tenantId">
+							<value>*</value>
+						</property>
+						<property name="serviceId">
+							<value>FirstService</value>
+						</property>
+						<property name="remoteHost">
+							<value>127.0.0.1</value>
+						</property>
+						<property name="remotePort">
+							<value>4447</value>
+						</property>
+						<property name="remoteLookup">
+							<value>test-service-ear/test-odd-service-impl/FirstService!com.canopus.testbed.IFirstService</value>
+						</property>
+					</bean>
+				</entry>
+				
+				<entry>
+					<key>
+						<bean id="secondServiceKey" class="com.canopus.mw.ServiceRouteKey">
+							<property name="tenantId">
+								<value>*</value>
+							</property>
+							<property name="serviceId">
+								<value>SecondService</value>
+							</property>
+						</bean>
+					</key>
+					<bean id="secondServiceDef" class="com.canopus.mw.ServiceRouteDefinition">
+						<property name="tenantId">
+							<value>*</value>
+						</property>
+						<property name="serviceId">
+							<value>SecondService</value>
+						</property>
+						<property name="remoteHost">
+							<value>127.0.0.1</value>
+						</property>
+						<property name="remotePort">
+							<value>4447</value>
+						</property>
+						<property name="remoteLookup">
+							<value>test-service-ear/test-even-service-impl/SecondService!com.canopus.testbed.ISecondService</value>
+						</property>
+					</bean>
+				</entry>				
+
+				<entry>
+					<key>
+						<bean id="thirdServiceKey" class="com.canopus.mw.ServiceRouteKey">
+							<property name="tenantId">
+								<value>*</value>
+							</property>
+							<property name="serviceId">
+								<value>ThirdService</value>
+							</property>
+						</bean>
+					</key>
+					<bean id="thirdServiceDef" class="com.canopus.mw.ServiceRouteDefinition">
+						<property name="tenantId">
+							<value>*</value>
+						</property>
+						<property name="serviceId">
+							<value>ThirdService</value>
+						</property>
+						<property name="remoteHost">
+							<value>127.0.0.1</value>
+						</property>
+						<property name="remotePort">
+							<value>4447</value>
+						</property>
+						<property name="remoteLookup">
+							<value>test-service-ear/test-odd-service-impl/ThirdService!com.canopus.testbed.IThirdService</value>
+						</property>
+					</bean>
+				</entry>
+				
+				<entry>
+					<key>
+						<bean id="fourthServiceKey" class="com.canopus.mw.ServiceRouteKey">
+							<property name="tenantId">
+								<value>*</value>
+							</property>
+							<property name="serviceId">
+								<value>FourthService</value>
+							</property>
+						</bean>
+					</key>
+					<bean id="fourthServiceDef" class="com.canopus.mw.ServiceRouteDefinition">
+						<property name="tenantId">
+							<value>*</value>
+						</property>
+						<property name="serviceId">
+							<value>FourthService</value>
+						</property>
+						<property name="remoteHost">
+							<value>127.0.0.1</value>
+						</property>
+						<property name="remotePort">
+							<value>4447</value>
+						</property>
+						<property name="remoteLookup">
+							<value>test-service-ear/test-even-service-impl/FourthService!com.canopus.testbed.IFourthService</value>
+						</property>
+					</bean>
+				</entry>
+				
+				<entry>
+					<key>
+						<bean id="fifthServiceKey" class="com.canopus.mw.ServiceRouteKey">
+							<property name="tenantId">
+								<value>*</value>
+							</property>
+							<property name="serviceId">
+								<value>FifthService</value>
+							</property>
+						</bean>
+					</key>
+					<bean id="fifthServiceDef" class="com.canopus.mw.ServiceRouteDefinition">
+						<property name="tenantId">
+							<value>*</value>
+						</property>
+						<property name="serviceId">
+							<value>FifthService</value>
+						</property>
+						<property name="remoteHost">
+							<value>127.0.0.1</value>
+						</property>
+						<property name="remotePort">
+							<value>4447</value>
+						</property>
+						<property name="remoteLookup">
+							<value>test-service-ear/test-odd-service-impl/FifthService!com.canopus.testbed.IFifthService</value>
+						</property>
+					</bean>
+				</entry>
+				
+				<entry>
+					<key>
+						<bean id="sixthServiceKey" class="com.canopus.mw.ServiceRouteKey">
+							<property name="tenantId">
+								<value>*</value>
+							</property>
+							<property name="serviceId">
+								<value>SixthService</value>
+							</property>
+						</bean>
+					</key>
+					<bean id="sixthServiceDef" class="com.canopus.mw.ServiceRouteDefinition">
+						<property name="tenantId">
+							<value>*</value>
+						</property>
+						<property name="serviceId">
+							<value>SixthService</value>
+						</property>
+						<property name="remoteHost">
+							<value>127.0.0.1</value>
+						</property>
+						<property name="remotePort">
+							<value>4447</value>
+						</property>
+						<property name="remoteLookup">
+							<value>test-service-ear/test-even-service-impl/SixthService!com.canopus.testbed.ISixthService</value>
+						</property>
+					</bean>
+				</entry>
+				
+				
+				<entry>
+					<key>
+						<bean id="seventhServiceKey" class="com.canopus.mw.ServiceRouteKey">
+							<property name="tenantId">
+								<value>*</value>
+							</property>
+							<property name="serviceId">
+								<value>SeventhService</value>
+							</property>
+						</bean>
+					</key>
+					<bean id="seventhServiceDef" class="com.canopus.mw.ServiceRouteDefinition">
+						<property name="tenantId">
+							<value>*</value>
+						</property>
+						<property name="serviceId">
+							<value>SeventhService</value>
+						</property>
+						<property name="remoteHost">
+							<value>127.0.0.1</value>
+						</property>
+						<property name="remotePort">
+							<value>4447</value>
+						</property>
+						<property name="remoteLookup">
+							<value>test-service-ear/test-odd-service-impl/SeventhService!com.canopus.testbed.ISeventhService</value>
+						</property>
+					</bean>
+				</entry>
+				
+				<entry>
+					<key>
+						<bean id="eighthServiceKey" class="com.canopus.mw.ServiceRouteKey">
+							<property name="tenantId">
+								<value>*</value>
+							</property>
+							<property name="serviceId">
+								<value>EighthService</value>
+							</property>
+						</bean>
+					</key>
+					<bean id="eighthServiceDef" class="com.canopus.mw.ServiceRouteDefinition">
+						<property name="tenantId">
+							<value>*</value>
+						</property>
+						<property name="serviceId">
+							<value>EighthService</value>
+						</property>
+						<property name="remoteHost">
+							<value>127.0.0.1</value>
+						</property>
+						<property name="remotePort">
+							<value>4447</value>
+						</property>
+						<property name="remoteLookup">
+							<value>test-service-ear/test-even-service-impl/EighthService!com.canopus.testbed.IEighthService</value>
+						</property>
+					</bean>
+				</entry>
+				
+				<entry>
+					<key>
+						<bean id="ninthServiceKey" class="com.canopus.mw.ServiceRouteKey">
+							<property name="tenantId">
+								<value>*</value>
+							</property>
+							<property name="serviceId">
+								<value>NinthService</value>
+							</property>
+						</bean>
+					</key>
+					<bean id="ninthServiceDef" class="com.canopus.mw.ServiceRouteDefinition">
+						<property name="tenantId">
+							<value>*</value>
+						</property>
+						<property name="serviceId">
+							<value>NinthService</value>
+						</property>
+						<property name="remoteHost">
+							<value>127.0.0.1</value>
+						</property>
+						<property name="remotePort">
+							<value>4447</value>
+						</property>
+						<property name="remoteLookup">
+							<value>test-service-ear/test-odd-service-impl/NinthService!com.canopus.testbed.INinthService</value>
+						</property>
+					</bean>
+				</entry>
+				
+				<entry>
+					<key>
+						<bean id="tenthServiceKey" class="com.canopus.mw.ServiceRouteKey">
+							<property name="tenantId">
+								<value>*</value>
+							</property>
+							<property name="serviceId">
+								<value>TenthService</value>
+							</property>
+						</bean>
+					</key>
+					<bean id="tenthServiceDef" class="com.canopus.mw.ServiceRouteDefinition">
+						<property name="tenantId">
+							<value>*</value>
+						</property>
+						<property name="serviceId">
+							<value>TenthService</value>
+						</property>
+						<property name="remoteHost">
+							<value>127.0.0.1</value>
+						</property>
+						<property name="remotePort">
+							<value>4447</value>
+						</property>
+						<property name="remoteLookup">
+							<value>test-service-ear/test-even-service-impl/TenthService!com.canopus.testbed.ITenthService</value>
+						</property>
+					</bean>
+				</entry>
+				
+								<entry>
+					<key>
+						<bean id="eleventhServiceKey" class="com.canopus.mw.ServiceRouteKey">
+							<property name="tenantId">
+								<value>*</value>
+							</property>
+							<property name="serviceId">
+								<value>EleventhService</value>
+							</property>
+						</bean>
+					</key>
+					<bean id="eleventhServiceDef" class="com.canopus.mw.ServiceRouteDefinition">
+						<property name="tenantId">
+							<value>*</value>
+						</property>
+						<property name="serviceId">
+							<value>EleventhService</value>
+						</property>
+						<property name="remoteHost">
+							<value>127.0.0.1</value>
+						</property>
+						<property name="remotePort">
+							<value>4447</value>
+						</property>
+						<property name="remoteLookup">
+							<value>test-service-ear/test-odd-service-impl/EleventhService!com.canopus.testbed.IEleventhService</value>
+						</property>
+					</bean>
+				</entry>
+				
+								<entry>
+					<key>
+						<bean id="twelfthServiceKey" class="com.canopus.mw.ServiceRouteKey">
+							<property name="tenantId">
+								<value>*</value>
+							</property>
+							<property name="serviceId">
+								<value>TwelfthService</value>
+							</property>
+						</bean>
+					</key>
+					<bean id="twelfthServiceDef" class="com.canopus.mw.ServiceRouteDefinition">
+						<property name="tenantId">
+							<value>*</value>
+						</property>
+						<property name="serviceId">
+							<value>TwelfthService</value>
+						</property>
+						<property name="remoteHost">
+							<value>127.0.0.1</value>
+						</property>
+						<property name="remotePort">
+							<value>4447</value>
+						</property>
+						<property name="remoteLookup">
+							<value>test-service-ear/test-even-service-impl/TwelfthService!com.canopus.testbed.ITwelfthService</value>
+						</property>
+					</bean>
+				</entry>
+				
+								<entry>
+					<key>
+						<bean id="thirteenthServiceKey" class="com.canopus.mw.ServiceRouteKey">
+							<property name="tenantId">
+								<value>*</value>
+							</property>
+							<property name="serviceId">
+								<value>ThirteenthService</value>
+							</property>
+						</bean>
+					</key>
+					<bean id="thirteenthServiceDef" class="com.canopus.mw.ServiceRouteDefinition">
+						<property name="tenantId">
+							<value>*</value>
+						</property>
+						<property name="serviceId">
+							<value>ThirteenthService</value>
+						</property>
+						<property name="remoteHost">
+							<value>127.0.0.1</value>
+						</property>
+						<property name="remotePort">
+							<value>4447</value>
+						</property>
+						<property name="remoteLookup">
+							<value>test-service-ear/test-odd-service-impl/ThirteenthService!com.canopus.testbed.IThirteenthService</value>
+						</property>
+					</bean>
+				</entry>
+				
+								<entry>
+					<key>
+						<bean id="fourteenthServiceKey" class="com.canopus.mw.ServiceRouteKey">
+							<property name="tenantId">
+								<value>*</value>
+							</property>
+							<property name="serviceId">
+								<value>FourteenthService</value>
+							</property>
+						</bean>
+					</key>
+					<bean id="fourteenthServiceDef" class="com.canopus.mw.ServiceRouteDefinition">
+						<property name="tenantId">
+							<value>*</value>
+						</property>
+						<property name="serviceId">
+							<value>FourteenthService</value>
+						</property>
+						<property name="remoteHost">
+							<value>127.0.0.1</value>
+						</property>
+						<property name="remotePort">
+							<value>4447</value>
+						</property>
+						<property name="remoteLookup">
+							<value>test-service-ear/test-even-service-impl/FourteenthService!com.canopus.testbed.IFourteenthService</value>
+						</property>
+					</bean>
+				</entry>
+				
+								<entry>
+					<key>
+						<bean id="fifteenthServiceKey" class="com.canopus.mw.ServiceRouteKey">
+							<property name="tenantId">
+								<value>*</value>
+							</property>
+							<property name="serviceId">
+								<value>FifteenthService</value>
+							</property>
+						</bean>
+					</key>
+					<bean id="fifteenthServiceDef" class="com.canopus.mw.ServiceRouteDefinition">
+						<property name="tenantId">
+							<value>*</value>
+						</property>
+						<property name="serviceId">
+							<value>FifteenthService</value>
+						</property>
+						<property name="remoteHost">
+							<value>127.0.0.1</value>
+						</property>
+						<property name="remotePort">
+							<value>4447</value>
+						</property>
+						<property name="remoteLookup">
+							<value>test-service-ear/test-odd-service-impl/FifteenthService!com.canopus.testbed.IFifteenthService</value>
+						</property>
+					</bean>
+				</entry>
+				
+								<entry>
+					<key>
+						<bean id="sixteenthServiceKey" class="com.canopus.mw.ServiceRouteKey">
+							<property name="tenantId">
+								<value>*</value>
+							</property>
+							<property name="serviceId">
+								<value>SixteenthService</value>
+							</property>
+						</bean>
+					</key>
+					<bean id="sixteenthServiceDef" class="com.canopus.mw.ServiceRouteDefinition">
+						<property name="tenantId">
+							<value>*</value>
+						</property>
+						<property name="serviceId">
+							<value>SixteenthService</value>
+						</property>
+						<property name="remoteHost">
+							<value>127.0.0.1</value>
+						</property>
+						<property name="remotePort">
+							<value>4447</value>
+						</property>
+						<property name="remoteLookup">
+							<value>test-service-ear/test-even-service-impl/SixteenthService!com.canopus.testbed.ISixteenthService</value>
+						</property>
+					</bean>
+				</entry>
+				
+								<entry>
+					<key>
+						<bean id="seventeenthServiceKey" class="com.canopus.mw.ServiceRouteKey">
+							<property name="tenantId">
+								<value>*</value>
+							</property>
+							<property name="serviceId">
+								<value>SeventeenthService</value>
+							</property>
+						</bean>
+					</key>
+					<bean id="seventeenthServiceDef" class="com.canopus.mw.ServiceRouteDefinition">
+						<property name="tenantId">
+							<value>*</value>
+						</property>
+						<property name="serviceId">
+							<value>SeventeenthService</value>
+						</property>
+						<property name="remoteHost">
+							<value>127.0.0.1</value>
+						</property>
+						<property name="remotePort">
+							<value>4447</value>
+						</property>
+						<property name="remoteLookup">
+							<value>test-service-ear/test-odd-service-impl/SeventeenthService!com.canopus.testbed.ISeventeenthService</value>
+						</property>
+					</bean>
+				</entry>
+				
+								<entry>
+					<key>
+						<bean id="eighteenthServiceKey" class="com.canopus.mw.ServiceRouteKey">
+							<property name="tenantId">
+								<value>*</value>
+							</property>
+							<property name="serviceId">
+								<value>EighteenthService</value>
+							</property>
+						</bean>
+					</key>
+					<bean id="eighteenthServiceDef" class="com.canopus.mw.ServiceRouteDefinition">
+						<property name="tenantId">
+							<value>*</value>
+						</property>
+						<property name="serviceId">
+							<value>EighteenthService</value>
+						</property>
+						<property name="remoteHost">
+							<value>127.0.0.1</value>
+						</property>
+						<property name="remotePort">
+							<value>4447</value>
+						</property>
+						<property name="remoteLookup">
+							<value>test-service-ear/test-even-service-impl/EighteenthService!com.canopus.testbed.IEighteenthService</value>
+						</property>
+					</bean>
+				</entry>
+				
+								<entry>
+					<key>
+						<bean id="ninteenthServiceKey" class="com.canopus.mw.ServiceRouteKey">
+							<property name="tenantId">
+								<value>*</value>
+							</property>
+							<property name="serviceId">
+								<value>NinteenthService</value>
+							</property>
+						</bean>
+					</key>
+					<bean id="ninteenthServiceDef" class="com.canopus.mw.ServiceRouteDefinition">
+						<property name="tenantId">
+							<value>*</value>
+						</property>
+						<property name="serviceId">
+							<value>NinteenthService</value>
+						</property>
+						<property name="remoteHost">
+							<value>127.0.0.1</value>
+						</property>
+						<property name="remotePort">
+							<value>4447</value>
+						</property>
+						<property name="remoteLookup">
+							<value>test-service-ear/test-odd-service-impl/NinteenthService!com.canopus.testbed.INinteenthService</value>
+						</property>
+					</bean>
+				</entry>
+				
+								<entry>
+					<key>
+						<bean id="twentiethServiceKey" class="com.canopus.mw.ServiceRouteKey">
+							<property name="tenantId">
+								<value>*</value>
+							</property>
+							<property name="serviceId">
+								<value>TwentiethService</value>
+							</property>
+						</bean>
+					</key>
+					<bean id="twentiethServiceDef" class="com.canopus.mw.ServiceRouteDefinition">
+						<property name="tenantId">
+							<value>*</value>
+						</property>
+						<property name="serviceId">
+							<value>TwentiethService</value>
+						</property>
+						<property name="remoteHost">
+							<value>127.0.0.1</value>
+						</property>
+						<property name="remotePort">
+							<value>4447</value>
+						</property>
+						<property name="remoteLookup">
+							<value>test-service-ear/test-even-service-impl/TwentiethService!com.canopus.testbed.ITwentiethService</value>
+						</property>
+					</bean>
+				</entry>		
+				<!-- RankingUnitSeriveImpl  START -->
+				<entry>
+					<key>
+						<bean id="rankingUnitServiceImplKey" class="com.canopus.mw.ServiceRouteKey">
+							<property name="tenantId">
+								<value>*</value>
+							</property>
+							<property name="serviceId">
+								<value>RankingUnitServiceImpl</value>
+							</property>
+						</bean>
+					</key>
+					<bean id="rankingUnitServiceImplDef" class="com.canopus.mw.ServiceRouteDefinition">
+						<property name="tenantId">
+							<value>*</value>
+						</property>
+						<property name="serviceId">
+							<value>RankingUnitServiceImpl</value>
+						</property>
+						<property name="remoteHost">
+							<value>182.72.176.214</value>
+						</property>
+						<property name="remotePort">
+							<value>4447</value>
+						</property>
+						<property name="remoteLookup">
+							<value>ums-service/mod-mgr-impl/RankingUnitServiceImpl!com.kpisoft.mod.RankingUnitService</value>
+						</property>
+					</bean>
+				</entry>
+				<!-- RankingUnitSeriveImpl END -->
+				
+						
+						</map>
+		</property>
+	</bean>
+
+	<!-- Routing Table Map END -->
+
+
+</beans>

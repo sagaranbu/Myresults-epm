@@ -1,0 +1,6 @@
+com\kpisoft\org\dac\GradeDataService.class
+com\kpisoft\org\dac\OrganizationSummaryDataService.class
+com\kpisoft\org\dac\OrganizationUnitDataService.class
+com\kpisoft\org\dac\OrganizationDimensionDataService.class
+com\kpisoft\org\dac\PositionDataService.class
+com\kpisoft\org\dac\OrganizationStructureDataService.class

@@ -1,0 +1,6 @@
+com\kpisoft\kpi\dac\ScorecardDataService.class
+com\kpisoft\kpi\dac\WorkflowDataService.class
+com\kpisoft\kpi\dac\KpiCategoryDataService.class
+com\kpisoft\kpi\dac\KpiDataService.class
+com\kpisoft\kpi\dac\KpiOrgTypeDataService.class
+com\kpisoft\kpi\dac\KpiTargetDataService.class

@@ -1,0 +1,12 @@
+com\canopus\entity\PartitionDataService.class
+com\canopus\entity\TagDataService.class
+com\canopus\entity\MiddlewareEventDataService.class
+com\canopus\entity\CustomizedEntityDataService.class
+com\canopus\entity\AttachmentDataService.class
+com\canopus\entity\NotificationRuleDataService.class
+com\canopus\entity\AggregationRuleDataService.class
+com\canopus\entity\DashboardMessageDataService.class
+com\canopus\entity\EventDataService.class
+com\canopus\entity\ScheduledEventDacParams.class
+com\canopus\entity\SystemDataService.class
+com\canopus\entity\EntityTypeDataService.class

@@ -1,0 +1,7 @@
+com\canopus\interceptor\impl\InterceptorDataServiceImpl.class
+com\canopus\interceptor\impl\TestEntityDataServiceImpl.class
+com\canopus\interceptor\domain\TestEntity2.class
+com\canopus\interceptor\domain\UsageInterceptorEntity.class
+com\canopus\interceptor\domain\AuditLoggingEntity.class
+com\canopus\interceptor\domain\OperationProfilerEntity.class
+com\canopus\interceptor\domain\TestEntity1.class

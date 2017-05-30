@@ -1,0 +1,17 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <groupId>com.kpisoft.epm</groupId>
+    <artifactId>framework-parent</artifactId>
+    <version>0.0.1</version>
+  </parent>
+  <groupId>com.canopus</groupId>
+  <artifactId>system-dac</artifactId>
+  <packaging>pom</packaging>
+  <modules>
+  	<module>saas-mgr-dac</module>
+  	<module>saas-mgr-dac-impl</module>
+  	<module>sys-dac</module>
+  	<module>sys-dac-impl</module>
+  </modules>
+</project>

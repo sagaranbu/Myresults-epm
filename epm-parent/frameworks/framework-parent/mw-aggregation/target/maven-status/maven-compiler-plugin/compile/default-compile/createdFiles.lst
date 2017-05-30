@@ -1,0 +1,5 @@
+com\canopus\mw\functoids\SumAggregationFinctoid.class
+com\canopus\mw\aggregation\AggregationService.class
+com\canopus\mw\functoids\WeightedAverageAggregationFunctoid.class
+com\canopus\mw\functoids\AverageAggegationFunctoid.class
+com\canopus\mw\functoids\CountAggrFunctoid.class

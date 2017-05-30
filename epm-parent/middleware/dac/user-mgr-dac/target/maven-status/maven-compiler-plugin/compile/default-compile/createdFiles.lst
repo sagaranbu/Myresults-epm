@@ -1,0 +1,7 @@
+com\kpisoft\user\dac\UserDataService.class
+com\kpisoft\user\dac\UserGroupDataService.class
+com\kpisoft\user\dac\OrgTypeRoleDataService.class
+com\kpisoft\user\dac\OperationDataService.class
+com\kpisoft\user\dac\RoleDataService.class
+com\kpisoft\user\dac\SessionStatsSummaryDataService.class
+com\kpisoft\user\dac\OrgUserRoleDataService.class

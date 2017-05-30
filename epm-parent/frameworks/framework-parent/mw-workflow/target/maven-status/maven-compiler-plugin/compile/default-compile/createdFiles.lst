@@ -1,0 +1,4 @@
+com\canopus\mwworkflow\WorkflowManager.class
+com\canopus\mwworkflow\WorkflowProcessBuilder.class
+com\canopus\mwworkflow\WorkflowManager$WorkflowTaskParams.class
+com\canopus\mwworkflow\WorkflowType.class

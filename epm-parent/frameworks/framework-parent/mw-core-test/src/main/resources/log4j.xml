@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+
+    Copyright(C) 2013 - 2014, assigned to KPISOFT Sdn. Bhd. All rights reserved.
+    Developed by Canopus Consulting <http://www.canopusconsulting.com>
+    
+    This file is part of Middleware Core Test.
+    
+    The intellectual and technical concepts contained herein may be covered 
+    by patents, patents in process, and are protected by trade secret or 
+    copyright law. Any unauthorized use of this code without prior approval 
+    from KPISOFT Sdn. Bhd. is prohibited.
+
+-->
+
+<!DOCTYPE log4j:configuration SYSTEM "log4j.dtd">
+
+<log4j:configuration xmlns:log4j="http://jakarta.apache.org/log4j/"
+    debug="false">
+
+    <appender name="consoleAppender" class="org.apache.log4j.ConsoleAppender">
+        <param name="Threshold" value="DEBUG" />
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern"
+                value="%d|%-5p|%c{1}|RID: %X{requestID}|%m%n" />
+        </layout>
+    </appender>
+
+    <appender name="rollingFileAppender" class="org.apache.log4j.RollingFileAppender">
+        <param name="MaxFileSize" value="10MB" />
+        <param name="Threshold" value="DEBUG" />
+        <param name="File" value="epm_service.log" />
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern"
+                value="%d|%-5p|%c{1}|RID: %X{requestID}|%m%n" />
+        </layout>
+    </appender>
+
+    <appender name="auditLogAppender" class="org.apache.log4j.RollingFileAppender">
+        <param name="MaxFileSize" value="10MB" />
+        <param name="Threshold" value="DEBUG" />
+        <param name="File" value="epm_audit.log" />
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern"
+                value="%d|%-5p|%c{1}|RID: %X{requestID}|%m%n" />
+        </layout>
+    </appender>
+
+    <logger name="com.canopus.mw.interceptor" additivity="false" >
+        <level value="DEBUG" />
+        <appender-ref ref="auditLogAppender" />
+        <appender-ref ref="consoleAppender" />
+    </logger>
+
+    <logger name="com.canopus" additivity="false" >
+        <level value="DEBUG" />
+        <appender-ref ref="rollingFileAppender" />
+        <appender-ref ref="consoleAppender" />
+    </logger>
+
+    <logger name="com.kpisoft" additivity="false">
+        <level value="DEBUG" />
+        <appender-ref ref="rollingFileAppender" />
+        <appender-ref ref="consoleAppender" />
+    </logger>
+
+    <root>
+        <level value="WARN" />
+        <appender-ref ref="consoleAppender" />
+        <appender-ref ref="rollingFileAppender" />
+    </root>
+
+</log4j:configuration>

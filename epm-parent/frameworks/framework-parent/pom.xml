@@ -1,0 +1,32 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <groupId>com.kpisoft.epm</groupId>
+    <artifactId>frameworks</artifactId>
+    <version>0.0.1</version>
+    <relativePath>../</relativePath>
+  </parent>
+  <artifactId>framework-parent</artifactId>
+  <groupId>com.kpisoft.epm</groupId>
+  <version>0.0.1</version>
+  <packaging>pom</packaging>
+  <name>Frameworks Parent</name>
+  <modules>
+  	<module>dac-core</module>
+  	<module>event-mgr</module>
+  	<module>event-mgr-impl</module>
+  	<module>graph-core</module>
+  	<module>mw-core</module>
+  	<module>mw-core-api</module>
+  	<module>mw-core-cacheloader</module>
+  	<module>mw-core-test</module>
+  	<module>mw-events</module>
+  	<module>mw-workflow</module>
+  	<module>sys</module>
+  	<module>system-dac</module>
+  	<!-- <module>system-dac/sys-dac</module>
+  	<module>system-dac/sys-dac-impl</module> -->
+  	<module>mw-aggregation</module>
+  </modules>
+  
+</project>

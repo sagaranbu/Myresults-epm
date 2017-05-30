@@ -1,0 +1,13 @@
+com\kpisoft\strategy\program\impl\ProgramManagerServiceImpl.class
+com\kpisoft\strategy\program\domain\ReviewProcessTemplate.class
+com\kpisoft\strategy\program\impl\ReviewProcessTemplateManagerServiceImpl.class
+com\kpisoft\strategy\exception\APIUtility.class
+com\kpisoft\strategy\program\impl\PerformanceZoneRecipientResolverImpl.class
+com\kpisoft\strategy\domain\StrategyMap.class
+com\kpisoft\strategy\domain\StrategyMapManager.class
+com\kpisoft\strategy\program\domain\PerformanceProgram.class
+com\kpisoft\strategy\impl\StrategyTemplateManagerServiceImpl.class
+com\kpisoft\strategy\domain\StrategyMapTemplate.class
+com\kpisoft\strategy\domain\StrategyMapTemplateManager.class
+com\kpisoft\strategy\program\domain\ReviewProcessManager.class
+com\kpisoft\strategy\program\domain\PerformanceProgramManager.class
